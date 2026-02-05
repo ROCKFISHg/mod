@@ -1,39 +1,35 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<title>vROCKFISHv Mods</title>
-<style>
-body { font-family: Arial; background:#121212; color:#eee; padding:20px; }
-h1 { color:#ff9800; }
-button { background:#4CAF50; color:white; padding:10px 20px; border:none; border-radius:5px; font-size:18px; cursor:pointer; }
-button:hover { background:#45a049; }
-</style>
+    <meta charset="UTF-8">
+    <title>vROCKFISHv Mod 下载页面</title>
+    <style>
+        body {
+            background-color: #1e1e1e;
+            color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+        }
+        a.download-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 30px;
+            background-color: #ff4500;
+            color: #fff;
+            font-size: 18px;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+        a.download-button:hover {
+            background-color: #e03e00;
+        }
+    </style>
 </head>
 <body>
-<h1>欢迎来到 vROCKFISHv Mods</h1>
-<p>点击下面按钮下载所有 Mod：</p>
-<button id="downloadAll">下载全部 Mod</button>
-
-<script>
-// 所有 Mod 文件路径
-const mods = [
-  './mods/mod1.jar',
-  './mods/mod2.jar',
-  './mods/mod3.jar'
-];
-
-document.getElementById('downloadAll').addEventListener('click', () => {
-  mods.forEach(file => {
-    const a = document.createElement('a');
-    a.href = file;
-    a.download = file.split('/').pop();
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  });
-});
-</script>
-
+    <h1>欢迎来到 vROCKFISHv Mod 下载页面</h1>
+    <p>点击下面按钮下载整包 Mod（mod.zip）</p>
+    <a class="download-button" href="mod.zip" download>下载所有 Mod</a>
 </body>
 </html>
