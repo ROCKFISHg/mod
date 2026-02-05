@@ -102,25 +102,6 @@ main{
     0 6px 10px rgba(0,0,0,.6);
 }
 
-/* ===== B站按钮（小号，对齐） ===== */
-.bili-btn{
-  width:44px;
-  height:44px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#fff;
-  border:2px solid var(--border);
-  box-shadow:
-    0 3px 0 #888,
-    0 5px 8px rgba(0,0,0,.6);
-}
-
-.bili-btn img{
-  width:26px;
-  height:26px;
-}
-
 /* ===== 服务器信息 ===== */
 .server-title,
 .status-title{
@@ -157,6 +138,32 @@ footer{
   font-size:12px;
   color:var(--text-sub);
 }
+
+/* ===== 新增粉色按钮面板 ===== */
+.button-panel{
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+  margin-top:16px;
+}
+
+.square-btn{
+  width:60px;
+  height:60px; /* 保证正方形 */
+  background:#ff69b4;
+  color:#fff;
+  font-weight:700;
+  font-size:14px;
+  text-align:center;
+  line-height:60px; /* 文字垂直居中 */
+  border:2px solid #d65ca8;
+  box-shadow:0 4px 0 #d65ca8,
+             0 6px 10px rgba(0,0,0,.6);
+  text-decoration:none;
+  display:inline-block;
+  border-radius:4px;
+  text-transform: lowercase;
+}
 </style>
 </head>
 
@@ -183,14 +190,7 @@ footer{
 
       <div class="mod-actions">
         <a href="#" class="btn">DOWNLOAD MOD</a>
-
-        <a class="bili-btn"
-           href="https://space.bilibili.com/3546618020236006?spm_id_from=333.1007.0.0"
-           target="_blank"
-           title="Bilibili">
-          <!-- 用你的 B 站图标文件替换 -->
-          <img src="bilibili.png" alt="Bilibili">
-        </a>
+        <!-- 原 B 站按钮已删除 -->
       </div>
     </div>
 
@@ -217,6 +217,16 @@ footer{
       <p class="status-line">
         Version: <strong>Java 1.21.7</strong>
       </p>
+    </div>
+
+    <!-- 新增粉色按钮面板（放最后，纯文字正方形按钮） -->
+    <div class="panel">
+      <div class="mod-title">Other Links</div>
+      <div class="button-panel">
+        <a href="https://space.bilibili.com/3546618020236006?spm_id_from=333.1007.0.0"
+           target="_blank"
+           class="square-btn">blibli</a>
+      </div>
     </div>
 
   </main>
@@ -253,3 +263,4 @@ fetch(apiUrl)
 
 </body>
 </html>
+
