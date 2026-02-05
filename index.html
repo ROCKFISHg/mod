@@ -139,7 +139,7 @@ footer{
   color:var(--text-sub);
 }
 
-/* ===== 新增粉色按钮面板 ===== */
+/* ===== 粉色按钮面板 ===== */
 .button-panel{
   display:flex;
   gap:16px;
@@ -149,13 +149,13 @@ footer{
 
 .square-btn{
   width:60px;
-  height:60px; /* 保证正方形 */
+  height:60px;
   background:#ff69b4;
   color:#fff;
   font-weight:700;
   font-size:14px;
   text-align:center;
-  line-height:60px; /* 文字垂直居中 */
+  line-height:60px;
   border:2px solid #d65ca8;
   box-shadow:0 4px 0 #d65ca8,
              0 6px 10px rgba(0,0,0,.6);
@@ -189,8 +189,8 @@ footer{
       </div>
 
       <div class="mod-actions">
-        <a href="#" class="btn">DOWNLOAD MOD</a>
-        <!-- 原 B 站按钮已删除 -->
+        <!-- 指向同一目录下的 mod.zip -->
+        <a href="mod.zip" class="btn" download>DOWNLOAD MOD</a>
       </div>
     </div>
 
@@ -203,7 +203,7 @@ footer{
       <p class="server-line">Email: <strong>rockfish114514@gmail.com</strong></p>
     </div>
 
-    <!-- 服务器状态（已恢复） -->
+    <!-- 服务器状态 -->
     <div class="panel">
       <div class="status-title">Server Status</div>
       <p class="status-line">
@@ -219,7 +219,7 @@ footer{
       </p>
     </div>
 
-    <!-- 新增粉色按钮面板（放最后，纯文字正方形按钮） -->
+    <!-- 粉色按钮面板（最后） -->
     <div class="panel">
       <div class="mod-title">Other Links</div>
       <div class="button-panel">
@@ -263,4 +263,5 @@ fetch(apiUrl)
 
 </body>
 </html>
+
 
