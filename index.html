@@ -2,40 +2,63 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>vROCKFISHv MOD下载</title>
+    <title>我的 Minecraft Mod 下载</title>
     <style>
+        /* Minecraft 风格像素字体 */
+        @import url('https://fonts.cdnfonts.com/css/minecraft');
+
         body {
-            font-family: Arial, sans-serif;
             background-color: #1a1a1a;
-            color: #f0f0f0;
+            color: #fff;
+            font-family: 'Minecraft', monospace;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
+            margin: 0;
         }
+
         h1 {
-            color: #ff6600;
+            font-size: 64px;
+            margin: 40px 0 20px;
+            text-shadow: 2px 2px #000;
         }
-        a.download-btn {
+
+        p {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        .download-button {
             display: inline-block;
-            margin-top: 20px;
-            padding: 12px 24px;
-            background-color: #ff6600;
+            padding: 20px 40px;
+            font-size: 28px;
             color: #fff;
+            background-color: #4caf50;
             text-decoration: none;
-            font-weight: bold;
-            border-radius: 6px;
-            transition: background 0.3s;
+            border: 3px solid #fff;
+            border-radius: 8px;
+            transition: all 0.3s ease;
         }
-        a.download-btn:hover {
-            background-color: #ff4500;
+
+        .download-button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        footer {
+            position: fixed;
+            bottom: 10px;
+            font-size: 16px;
+            color: #ccc;
         }
     </style>
 </head>
 <body>
-    <h1>vROCKFISHv MOD下载</h1>
-    <p>点击下面按钮下载全部MOD压缩包</p>
-    <a href="mod.zip" class="download-btn" download>下载 MOD</a>
+    <h1>我的 Minecraft Mods</h1>
+    <p>点击下面按钮下载整包 Mod</p>
+    <a class="download-button" href="mod.zip" download>下载 Mod 压缩包</a>
+    <footer>vrockfishv.com</footer>
 </body>
 </html>
