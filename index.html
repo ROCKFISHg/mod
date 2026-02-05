@@ -1,64 +1,117 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <title>我的 Minecraft Mod 下载</title>
-    <style>
-        /* Minecraft 风格像素字体 */
-        @import url('https://fonts.cdnfonts.com/css/minecraft');
+  <meta charset="UTF-8" />
+  <title>Mods Download | vrockfishv</title>
 
-        body {
-            background-color: #1a1a1a;
-            color: #fff;
-            font-family: 'Minecraft', monospace;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-        }
+  <!-- 像素 / MC 风格字体（可加载） -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
-        h1 {
-            font-size: 64px;
-            margin: 40px 0 20px;
-            text-shadow: 2px 2px #000;
-        }
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        p {
-            font-size: 24px;
-            margin-bottom: 30px;
-        }
+    body {
+      background: #0e0e0e;
+      color: #ffffff;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
 
-        .download-button {
-            display: inline-block;
-            padding: 20px 40px;
-            font-size: 28px;
-            color: #fff;
-            background-color: #4caf50;
-            text-decoration: none;
-            border: 3px solid #fff;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 20px;
+      text-align: center;
+    }
 
-        .download-button:hover {
-            background-color: #45a049;
-            transform: scale(1.05);
-        }
+    /* 主标题 */
+    h1 {
+      font-size: 48px;
+      color: #ffcc00;
+      margin-bottom: 20px;
+    }
 
-        footer {
-            position: fixed;
-            bottom: 10px;
-            font-size: 16px;
-            color: #ccc;
-        }
-    </style>
+    /* 作者署名 */
+    .author {
+      font-size: 16px;
+      color: #bbbbbb;
+      margin-bottom: 50px;
+    }
+
+    .author span {
+      color: #ffcc00;
+    }
+
+    /* 下载区域 */
+    .download-box {
+      border: 2px solid #ffcc00;
+      padding: 40px;
+    }
+
+    .download-title {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .download-desc {
+      color: #cccccc;
+      font-size: 14px;
+      margin-bottom: 30px;
+    }
+
+    /* 纯平面按钮 */
+    .download-btn {
+      display: inline-block;
+      padding: 16px 40px;
+      background: #ffcc00;
+      color: #000000;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+    }
+
+    .download-btn:hover {
+      background: #ffd633;
+    }
+
+    /* 页脚 */
+    footer {
+      margin-top: 80px;
+      font-size: 12px;
+      color: #777777;
+    }
+  </style>
 </head>
+
 <body>
-    <h1>我的 Minecraft Mods</h1>
-    <p>点击下面按钮下载整包 Mod</p>
-    <a class="download-button" href="mod.zip" download>下载 Mod 压缩包</a>
-    <footer>vrockfishv.com</footer>
+  <div class="page">
+    <h1>MODS DOWNLOAD</h1>
+
+    <div class="author">
+      Created & maintained by <span>ROCKFISH</span>  
+      <br>
+      Project name: <span>vrockfishv</span>
+    </div>
+
+    <div class="download-box">
+      <div class="download-title">Mod Pack</div>
+      <div class="download-desc">
+        Fabric · Tested · Direct download
+      </div>
+
+      <a class="download-btn" href="mod.zip">
+        DOWNLOAD
+      </a>
+    </div>
+
+    <footer>
+      © 2026 vrockfishv · All rights reserved
+    </footer>
+  </div>
 </body>
 </html>
