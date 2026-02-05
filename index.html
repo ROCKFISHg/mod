@@ -1,117 +1,255 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <title>Mods Download | vrockfishv</title>
+<meta charset="UTF-8">
+<title>ROCKFISH</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- 像素 / MC 风格字体（可加载） -->
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-main:#0c0e11;
+  --bg-panel:#15181e;
+  --border:#1f242c;
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  --mc-green:#5fbf3f;
+  --green-dark:#1f7f4a;
 
-    body {
-      background: #0e0e0e;
-      color: #ffffff;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-                   "PingFang SC", "Microsoft YaHei", sans-serif;
-    }
+  --blue-main:#3aa0ff;
+  --blue-mid:#6bb8ff;
+  --blue-soft:#9fcfff;
 
-    .page {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 80px 20px;
-      text-align: center;
-    }
+  --text-main:#e5e7eb;
+  --text-sub:#9aa4b2;
+}
 
-    /* 主标题 */
-    h1 {
-      font-size: 48px;
-      color: #ffcc00;
-      margin-bottom: 20px;
-    }
+*{box-sizing:border-box;}
 
-    /* 作者署名 */
-    .author {
-      font-size: 16px;
-      color: #bbbbbb;
-      margin-bottom: 50px;
-    }
+body{
+  margin:0;
+  padding:24px;
+  background:#000;
+  font-family:system-ui,Segoe UI,Arial;
+}
 
-    .author span {
-      color: #ffcc00;
-    }
+.page{
+  min-height:calc(100vh - 48px);
+  background:var(--bg-main);
+  border:2px solid var(--border);
+}
 
-    /* 下载区域 */
-    .download-box {
-      border: 2px solid #ffcc00;
-      padding: 40px;
-    }
+/* ===== 标题 ===== */
+.hero{
+  padding:32px;
+  border-bottom:1px solid var(--border);
+}
 
-    .download-title {
-      font-size: 24px;
-      margin-bottom: 20px;
-    }
+.hero-title{
+  margin:0;
+}
 
-    .download-desc {
-      color: #cccccc;
-      font-size: 14px;
-      margin-bottom: 30px;
-    }
+.hero-title .main{
+  display:block;
+  font-size:56px;
+  font-weight:700;
+  color:var(--mc-green);
+}
 
-    /* 纯平面按钮 */
-    .download-btn {
-      display: inline-block;
-      padding: 16px 40px;
-      background: #ffcc00;
-      color: #000000;
-      text-decoration: none;
-      font-size: 18px;
-      font-weight: bold;
-      border: none;
-    }
+.hero-title .sub{
+  display:block;
+  font-size:14px;
+  color:var(--green-dark);
+  margin-top:6px;
+}
 
-    .download-btn:hover {
-      background: #ffd633;
-    }
+/* ===== 主体 ===== */
+main{
+  padding:32px;
+  display:grid;
+  gap:28px;
+}
 
-    /* 页脚 */
-    footer {
-      margin-top: 80px;
-      font-size: 12px;
-      color: #777777;
-    }
-  </style>
+.panel{
+  background:var(--bg-panel);
+  border:1px solid var(--border);
+  padding:24px;
+}
+
+/* ===== Mod 下载 ===== */
+.mod-title{
+  font-size:20px;
+  font-weight:600;
+  color:var(--blue-main);
+  margin-bottom:14px;
+}
+
+.mod-actions{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+
+/* 按钮 */
+.btn{
+  padding:14px 28px;
+  font-size:16px;
+  font-weight:700;
+  background:var(--mc-green);
+  color:#0b120d;
+  border:2px solid #2f6f1f;
+  text-decoration:none;
+  box-shadow:
+    0 4px 0 #2f6f1f,
+    0 6px 10px rgba(0,0,0,.6);
+}
+
+/* ===== B站按钮（小号，对齐） ===== */
+.bili-btn{
+  width:44px;
+  height:44px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff;
+  border:2px solid var(--border);
+  box-shadow:
+    0 3px 0 #888,
+    0 5px 8px rgba(0,0,0,.6);
+}
+
+.bili-btn img{
+  width:26px;
+  height:26px;
+}
+
+/* ===== 服务器信息 ===== */
+.server-title,
+.status-title{
+  font-size:20px;
+  font-weight:600;
+  color:var(--blue-main);
+  margin-bottom:10px;
+}
+
+.server-line,
+.status-line{
+  font-size:14px;
+  color:var(--blue-soft);
+  margin:6px 0;
+}
+
+/* ===== 状态灯 ===== */
+.dot{
+  display:inline-block;
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:#555;
+  margin-right:6px;
+}
+
+.online{
+  background:var(--mc-green);
+}
+
+footer{
+  padding:24px 32px;
+  border-top:1px solid var(--border);
+  font-size:12px;
+  color:var(--text-sub);
+}
+</style>
 </head>
 
 <body>
-  <div class="page">
-    <h1>MODS DOWNLOAD</h1>
 
-    <div class="author">
-      Created & maintained by <span>ROCKFISH</span>  
-      <br>
-      Project name: <span>vrockfishv</span>
-    </div>
+<div class="page">
 
-    <div class="download-box">
-      <div class="download-title">Mod Pack</div>
-      <div class="download-desc">
-        Fabric · Tested · Direct download
+  <!-- 标题 -->
+  <section class="hero">
+    <h1 class="hero-title">
+      <span class="main">ROCKFISH</span>
+      <span class="sub">is the most handsome fish</span>
+      <span class="sub">in the world</span>
+    </h1>
+  </section>
+
+  <main>
+
+    <!-- Mod 下载 -->
+    <div class="panel">
+      <div class="mod-title">
+        If you want to play ROCKFISH's world, you need to download this Mod
       </div>
 
-      <a class="download-btn" href="mod.zip">
-        DOWNLOAD
-      </a>
+      <div class="mod-actions">
+        <a href="#" class="btn">DOWNLOAD MOD</a>
+
+        <a class="bili-btn"
+           href="https://space.bilibili.com/3546618020236006?spm_id_from=333.1007.0.0"
+           target="_blank"
+           title="Bilibili">
+          <!-- 用你的 B 站图标文件替换 -->
+          <img src="bilibili.png" alt="Bilibili">
+        </a>
+      </div>
     </div>
 
-    <footer>
-      © 2026 vrockfishv · All rights reserved
-    </footer>
-  </div>
+    <!-- 服务器信息 -->
+    <div class="panel">
+      <div class="server-title">ROCKFISH's server</div>
+      <p class="server-line">Address: <strong>vrockfishv</strong></p>
+      <p class="server-line">Vanilla survival server, no cheats</p>
+      <p class="server-line">Minecraft Version: <strong>Java 1.21.7</strong></p>
+      <p class="server-line">Email: <strong>rockfish114514@gmail.com</strong></p>
+    </div>
+
+    <!-- 服务器状态（已恢复） -->
+    <div class="panel">
+      <div class="status-title">Server Status</div>
+      <p class="status-line">
+        <span id="status-dot" class="dot"></span>
+        <span id="status-text">Checking...</span>
+      </p>
+      <p class="status-line">
+        Players:
+        <strong><span id="players-online">-</span> / <span id="players-max">-</span></strong>
+      </p>
+      <p class="status-line">
+        Version: <strong>Java 1.21.7</strong>
+      </p>
+    </div>
+
+  </main>
+
+  <footer>© ROCKFISH</footer>
+
+</div>
+
+<script>
+const serverAddress = "vrockfishv";
+const apiUrl = `https://api.mcsrvstat.us/3/${serverAddress}`;
+
+fetch(apiUrl)
+  .then(res => res.json())
+  .then(data => {
+    const dot = document.getElementById("status-dot");
+    const text = document.getElementById("status-text");
+
+    if (data.online) {
+      dot.classList.add("online");
+      text.textContent = "Online";
+      document.getElementById("players-online").textContent =
+        data.players?.online ?? 0;
+      document.getElementById("players-max").textContent =
+        data.players?.max ?? "?";
+    } else {
+      text.textContent = "Offline";
+    }
+  })
+  .catch(() => {
+    document.getElementById("status-text").textContent = "Unavailable";
+  });
+</script>
+
 </body>
 </html>
