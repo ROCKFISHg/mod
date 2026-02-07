@@ -149,6 +149,26 @@ main{
   box-shadow:0 3px 0 #d65ca8,0 4px 6px rgba(0,0,0,.6);
 }
 
+/* ===== 贪吃蛇按钮 ===== */
+.snake-controls{
+  margin-top:12px;
+  text-align:center;
+}
+.snake-controls button{
+  width:48px;
+  height:48px;
+  margin:4px;
+  background:var(--blue-main);
+  color:#fff;
+  font-size:20px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+}
+.snake-controls button:hover{
+  background:#2b8be0;
+}
+
 footer{
   padding:24px 32px;
   border-top:1px solid var(--border);
@@ -162,7 +182,6 @@ footer{
 
 <div class="page">
 
-  <!-- 标题 -->
   <section class="hero">
     <h1 class="hero-title">
       <span class="main">ROCKFISH</span>
@@ -173,35 +192,45 @@ footer{
 
   <main>
 
-    <!-- Mod 下载 -->
     <div class="panel">
       <div class="mod-title">
         If you want to play ROCKFISH's world, you need to download this Mod
       </div>
-
       <div class="mod-actions">
-        <a href="https://raw.githubusercontent.com/ROCKFISHg/mod/main/mod.zip"
+        <a href="https://github.com/ROCKFISHg/mod/blob/main/mods.zip"
            class="btn"
            download>DOWNLOAD MOD</a>
       </div>
     </div>
 
-    <!-- IP 查询 -->
     <div class="panel">
       <div class="mod-title">Your IP Information</div>
-
       <div class="mod-actions">
-        <a class="btn" href="javascript:void(0)" onclick="getIP()">
-          CHECK MY IP
-        </a>
+        <a class="btn" href="javascript:void(0)" onclick="getIP()">CHECK MY IP</a>
       </div>
-
       <div id="ip-info" class="info-line">
         Click the button to view your IP address
       </div>
     </div>
 
-    <!-- 其他链接 -->
+    <div class="panel">
+      <div class="mod-title">Snake · Catch the Fish</div>
+      <canvas id="snakeCanvas" width="400" height="400"
+        style="background:#000;border:1px solid #1f242c;"></canvas>
+
+      <div class="snake-controls">
+        <button onclick="setDir('up')">↑</button><br>
+        <button onclick="setDir('left')">←</button>
+        <button onclick="setDir('down')">↓</button>
+        <button onclick="setDir('right')">→</button>
+      </div>
+
+      <div class="info-line">
+        Score: <span id="score">0</span> |
+        Visits: <span id="visit-count">0</span>
+      </div>
+    </div>
+
     <div class="panel">
       <div class="mod-title">Other Links</div>
       <div class="button-panel">
@@ -214,28 +243,80 @@ footer{
   </main>
 
   <footer>© ROCKFISH</footer>
-
 </div>
 
 <script>
 function getIP(){
   const box = document.getElementById("ip-info");
   box.textContent = "Loading...";
-
   fetch("https://ipapi.co/json/")
-    .then(res => res.json())
-    .then(data => {
-      box.innerHTML = `
-        IP Address: <strong>${data.ip}</strong><br>
-        Country: <strong>${data.country_name}</strong><br>
-        City: <strong>${data.city}</strong><br>
-        ISP: <strong>${data.org ?? "Unknown"}</strong>
-      `;
+    .then(r=>r.json())
+    .then(d=>{
+      box.innerHTML =
+        "IP: <b>"+d.ip+"</b><br>"+
+        "Country: <b>"+d.country_name+"</b><br>"+
+        "City: <b>"+d.city+"</b>";
     })
-    .catch(() => {
-      box.textContent = "Failed to load IP information.";
-    });
+    .catch(()=>box.textContent="Failed to load IP");
 }
+
+/* 访问统计 */
+const key="rockfish_visit";
+let v=localStorage.getItem(key);
+v=v?++v:1;
+localStorage.setItem(key,v);
+document.getElementById("visit-count").textContent=v;
+
+/* 贪吃蛇 */
+const c=document.getElementById("snakeCanvas");
+const x=c.getContext("2d");
+const g=20;
+let snake=[{x:10,y:10}];
+let dir="right";
+let food={x:5,y:5};
+let score=0;
+
+function setDir(d){
+  if(d==="up"&&dir==="down")return;
+  if(d==="down"&&dir==="up")return;
+  if(d==="left"&&dir==="right")return;
+  if(d==="right"&&dir==="left")return;
+  dir=d;
+}
+
+document.addEventListener("keydown",e=>{
+  if(e.key==="ArrowUp")setDir("up");
+  if(e.key==="ArrowDown")setDir("down");
+  if(e.key==="ArrowLeft")setDir("left");
+  if(e.key==="ArrowRight")setDir("right");
+});
+
+function loop(){
+  let h={...snake[0]};
+  if(dir==="up")h.y--;
+  if(dir==="down")h.y++;
+  if(dir==="left")h.x--;
+  if(dir==="right")h.x++;
+
+  if(h.x<0||h.y<0||h.x>=20||h.y>=20){
+    snake=[{x:10,y:10}];score=0;return;
+  }
+
+  snake.unshift(h);
+  if(h.x===food.x&&h.y===food.y){
+    score++;
+    document.getElementById("score").textContent=score;
+    food={x:Math.floor(Math.random()*20),y:Math.floor(Math.random()*20)};
+  }else snake.pop();
+
+  x.clearRect(0,0,400,400);
+  x.fillStyle="yellow";
+  x.fillRect(food.x*g,food.y*g,g,g);
+  x.fillStyle="lime";
+  snake.forEach(s=>x.fillRect(s.x*g,s.y*g,g-1,g-1));
+}
+
+setInterval(loop,150);
 </script>
 
 </body>
