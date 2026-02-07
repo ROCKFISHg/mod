@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>ROCKFISH Verify</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+  --bg-main:#0c0e11;
+  --bg-panel:#15181e;
+  --border:#1f242c;
+
+  --mc-green:#5fbf3f;
+  --green-dark:#1f7f4a;
+
+  --blue-main:#3aa0ff;
+  --blue-soft:#9fcfff;
+
+  --text-main:#e5e7eb;
+  --text-sub:#9aa4b2;
+}
+
+/* ===== 通用 ===== */
+*{box-sizing:border-box;}
+body{margin:0;font-family:system-ui,Segoe UI,Arial;background:#000;}
+
+/* ===== 验证模块 ===== */
+#verify{
+  position:fixed;inset:0;
+  background:#000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:10;
+}
+
+#verify-box{
+  background:var(--bg-main);
+  border:2px solid var(--border);
+  padding:48px;
+  text-align:center;
+  position:relative;
+  min-width:420px;
+}
+
+#verify-title{font-size:48px;font-weight:700;color:var(--mc-green);margin-bottom:10px;}
+#verify-sub{font-size:14px;color:var(--blue-main);margin-bottom:30px;}
+
+.btn{padding:14px 28px;font-size:16px;font-weight:700;border-radius:6px;border:2px solid transparent;cursor:pointer;position:absolute;transition:all .2s ease;box-shadow:0 4px 0 rgba(0,0,0,.6);}
+.btn:hover{transform:translateY(-3px);}
+.btn:active{transform:translateY(1px);}
+.btn-green{background:var(--mc-green);color:#0b120d;border-color:#2f6f1f;}
+.btn-blue{background:var(--blue-main);color:#041321;border-color:#1f5fa0;}
+
+/* ===== ROCKFISH 页面 ===== */
+#rockfish-page{display:none; padding:24px;}
+
+.page{min-height:calc(100vh - 48px);background:var(--bg-main);border:2px solid var(--border);}
+.hero{padding:32px;border-bottom:1px solid var(--border);}
+.hero-title{margin:0;}
+.hero-title .main{display:block;font-size:56px;font-weight:700;color:var(--mc-green);}
+.hero-title .sub{display:block;font-size:14px;color:var(--green-dark);margin-top:6px;}
+main{padding:32px;display:grid;gap:28px;}
+.panel{background:var(--bg-panel);border:1px solid var(--border);padding:24px;}
+.mod-title{font-size:20px;font-weight:600;color:var(--blue-main);margin-bottom:14px;}
+.mod-actions{display:flex;align-items:center;gap:16px;}
+.btn-rock{padding:14px 28px;font-size:16px;font-weight:700;background:var(--mc-green);color:#0b120d;border:2px solid #2f6f1f;text-decoration:none;box-shadow:0 4px 0 #2f6f1f,0 6px 10px rgba(0,0,0,.6);border-radius:6px;transition: all 0.2s ease;display:inline-block;}
+.btn-rock:hover{transform: translateY(-3px);box-shadow:0 6px 0 #2f6f1f,0 8px 12px rgba(0,0,0,.6);}
+.btn-rock:active{transform: translateY(1px);box-shadow:0 3px 0 #2f6f1f,0 4px 6px rgba(0,0,0,.6);}
+.info-line{font-size:14px;color:var(--blue-soft);margin-top:16px;line-height:1.6;}
+.button-panel{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px;}
+.square-btn{width:60px;height:60px;background:#ff69b4;color:#fff;font-weight:700;font-size:14px;text-align:center;line-height:60px;border:2px solid #d65ca8;box-shadow:0 4px 0 #d65ca8,0 6px 10px rgba(0,0,0,.6);text-decoration:none;display:inline-block;border-radius:4px;text-transform: lowercase;}
+.square-btn:hover{transform: translateY(-2px);box-shadow:0 6px 0 #d65ca8,0 8px 10px rgba(0,0,0,.6);}
+.square-btn:active{transform: translateY(1px);box-shadow:0 3px 0 #d65ca8,0 4px 6px rgba(0,0,0,.6);}
+.snake-controls{margin-top:12px;text-align:center;}
+.snake-controls button{width:48px;height:48px;margin:4px;background:var(--blue-main);color:#fff;font-size:20px;border:none;border-radius:6px;cursor:pointer;}
+.snake-controls button:hover{background:#2b8be0;}
+footer{padding:24px 32px;border-top:1px solid var(--border);font-size:12px;color:var(--text-sub);}
+</style>
+</head>
+<body>
+
+<!-- ===== 验证模块 ===== -->
+<div id="verify">
+  <div id="verify-box">
+    <div id="verify-title">Are you person?</div>
+    <div id="verify-sub"><span id="count">0</span> / 10</div>
+    <div id="yesBtn" class="btn btn-green">Yes</div>
+    <div id="noBtn" class="btn btn-blue">No</div>
+  </div>
+</div>
+
+<!-- ===== ROCKFISH 页面 ===== -->
+<div id="rockfish-page">
+  <div class="page">
+    <section class="hero">
+      <h1 class="hero-title">
+        <span class="main">ROCKFISH</span>
+        <span class="sub">is the most handsome fish</span>
+        <span class="sub">in the world</span>
+      </h1>
+    </section>
+
+    <main>
+      <div class="panel">
+        <div class="mod-title">
+          If you want to play ROCKFISH's world, you need to download this Mod
+        </div>
+        <div class="mod-actions">
+          <a href="https://github.com/ROCKFISHg/mod/blob/main/mods.zip" class="btn-rock" download>DOWNLOAD MOD</a>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="mod-title">Your IP Information</div>
+        <div class="mod-actions">
+          <a class="btn-rock" href="javascript:void(0)" onclick="getIP()">CHECK MY IP</a>
+        </div>
+        <div id="ip-info" class="info-line">Click the button to view your IP address</div>
+      </div>
+
+      <div class="panel">
+        <div class="mod-title">Snake · Catch the Fish</div>
+        <canvas id="snakeCanvas" width="400" height="400" style="background:#000;border:1px solid #1f242c;"></canvas>
+        <div class="snake-controls">
+          <button onclick="setDir('up')">↑</button><br>
+          <button onclick="setDir('left')">←</button>
+          <button onclick="setDir('down')">↓</button>
+          <button onclick="setDir('right')">→</button>
+        </div>
+        <div class="info-line">
+          Score: <span id="score">0</span> | Visits: <span id="visit-count">0</span>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="mod-title">Other Links</div>
+        <div class="button-panel">
+          <a href="https://space.bilibili.com/3546618020236006" target="_blank" class="square-btn">blibli</a>
+        </div>
+      </div>
+    </main>
+    <footer>© ROCKFISH</footer>
+  </div>
+</div>
+
+<script>
+/* ===== 验证逻辑 ===== */
+let clicks=0;
+const yes=document.getElementById("yesBtn");
+const no=document.getElementById("noBtn");
+const count=document.getElementById("count");
+const verifyDiv=document.getElementById("verify");
+const rockfishDiv=document.getElementById("rockfish-page");
+
+function moveYes(){
+  const box=document.getElementById("verify-box");
+  const rect=box.getBoundingClientRect();
+  const centerX=rect.width/2;
+  const centerY=rect.height/2+40;
+  const offsetX=(Math.random()-0.5)*240;
+  const offsetY=(Math.random()-0.5)*160;
+  yes.style.left=centerX+offsetX+"px";
+  yes.style.top=centerY+offsetY+"px";
+}
+
+yes.onclick=()=>{
+  clicks++;
+  count.textContent=clicks;
+  moveYes();
+  if(clicks>=10){
+    verifyDiv.style.display="none"; // 隐藏验证
+    rockfishDiv.style.display="block"; // 显示ROCKFISH
+  }
+};
+
+no.onclick=()=>{
+  clicks=0;
+  count.textContent=0;
+  moveYes();
+};
+
+window.onload=()=>{
+  moveYes();
+  no.style.left="50%";
+  no.style.top="65%";
+  no.style.transform="translateX(-50%)";
+};
+
+/* ===== ROCKFISH JS ===== */
+function getIP(){
+  const box=document.getElementById("ip-info");
+  box.textContent="Loading...";
+  fetch("https://ipapi.co/json/")
+    .then(r=>r.json())
+    .then(d=>{
+      box.innerHTML="IP: <b>"+d.ip+"</b><br>Country: <b>"+d.country_name+"</b><br>City: <b>"+d.city+"</b>";
+    })
+    .catch(()=>box.textContent="Failed to load IP");
+}
+
+const key="rockfish_visit";
+let v=localStorage.getItem(key);
+v=v?++v:1;
+localStorage.setItem(key,v);
+document.getElementById("visit-count").textContent=v;
+
+const c=document.getElementById("snakeCanvas");
+const x=c.getContext("2d");
+const g=20;
+let snake=[{x:10,y:10}];
+let dir="right";
+let food={x:5,y:5};
+let score=0;
+
+function setDir(d){
+  if(d==="up"&&dir==="down")return;
+  if(d==="down"&&dir==="up")return;
+  if(d==="left"&&dir==="right")return;
+  if(d==="right"&&dir==="left")return;
+  dir=d;
+}
+document.addEventListener("keydown",e=>{
+  if(e.key==="ArrowUp")setDir("up");
+  if(e.key==="ArrowDown")setDir("down");
+  if(e.key==="ArrowLeft")setDir("left");
+  if(e.key==="ArrowRight")setDir("right");
+});
+function loop(){
+  let h={...snake[0]};
+  if(dir==="up")h.y--;
+  if(dir==="down")h.y++;
+  if(dir==="left")h.x--;
+  if(dir==="right")h.x++;
+  if(h.x<0||h.y<0||h.x>=20||h.y>=20){snake=[{x:10,y:10}];score=0;return;}
+  snake.unshift(h);
+  if(h.x===food.x&&h.y===food.y){
+    score++;
+    document.getElementById("score").textContent=score;
+    food={x:Math.floor(Math.random()*20),y:Math.floor(Math.random()*20)};
+  }else snake.pop();
+  x.clearRect(0,0,400,400);
+  x.fillStyle="yellow";
+  x.fillRect(food.x*g,food.y*g,g,g);
+  x.fillStyle="lime";
+  snake.forEach(s=>x.fillRect(s.x*g,s.y*g,g-1,g-1));
+}
+setInterval(loop,150);
+</script>
+
+</body>
+</html>
