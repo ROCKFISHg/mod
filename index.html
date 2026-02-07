@@ -15,7 +15,6 @@
   --green-dark:#1f7f4a;
 
   --blue-main:#3aa0ff;
-  --blue-mid:#6bb8ff;
   --blue-soft:#9fcfff;
 
   --text-main:#e5e7eb;
@@ -74,7 +73,6 @@ main{
   padding:24px;
 }
 
-/* ===== Mod 下载 ===== */
 .mod-title{
   font-size:20px;
   font-weight:600;
@@ -88,7 +86,7 @@ main{
   gap:16px;
 }
 
-/* ===== 下载按钮 ===== */
+/* ===== 立体按钮 ===== */
 .btn{
   padding:14px 28px;
   font-size:16px;
@@ -100,6 +98,7 @@ main{
   box-shadow:0 4px 0 #2f6f1f,0 6px 10px rgba(0,0,0,.6);
   border-radius:6px;
   transition: all 0.2s ease;
+  display:inline-block;
 }
 .btn:hover{
   transform: translateY(-3px);
@@ -110,44 +109,14 @@ main{
   box-shadow:0 3px 0 #2f6f1f,0 4px 6px rgba(0,0,0,.6);
 }
 
-/* ===== 服务器信息 ===== */
-.server-title,
-.status-title{
-  font-size:20px;
-  font-weight:600;
-  color:var(--blue-main);
-  margin-bottom:10px;
-}
-
-.server-line,
-.status-line{
+.info-line{
   font-size:14px;
   color:var(--blue-soft);
-  margin:6px 0;
+  margin-top:16px;
+  line-height:1.6;
 }
 
-/* ===== 状态灯 ===== */
-.dot{
-  display:inline-block;
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  background:#555;
-  margin-right:6px;
-}
-
-.online{
-  background:var(--mc-green);
-}
-
-footer{
-  padding:24px 32px;
-  border-top:1px solid var(--border);
-  font-size:12px;
-  color:var(--text-sub);
-}
-
-/* ===== 粉色按钮面板 ===== */
+/* ===== 粉色按钮 ===== */
 .button-panel{
   display:flex;
   gap:16px;
@@ -179,6 +148,13 @@ footer{
   transform: translateY(1px);
   box-shadow:0 3px 0 #d65ca8,0 4px 6px rgba(0,0,0,.6);
 }
+
+footer{
+  padding:24px 32px;
+  border-top:1px solid var(--border);
+  font-size:12px;
+  color:var(--text-sub);
+}
 </style>
 </head>
 
@@ -204,39 +180,28 @@ footer{
       </div>
 
       <div class="mod-actions">
-        <!-- 下载链接指向 GitHub raw 文件 -->
         <a href="https://raw.githubusercontent.com/ROCKFISHg/mod/main/mod.zip"
            class="btn"
            download>DOWNLOAD MOD</a>
       </div>
     </div>
 
-    <!-- 服务器信息 -->
+    <!-- IP 查询 -->
     <div class="panel">
-      <div class="server-title">ROCKFISH's server</div>
-      <p class="server-line">Address: <strong>vrockfishv</strong></p>
-      <p class="server-line">Vanilla survival server, no cheats</p>
-      <p class="server-line">Minecraft Version: <strong>Java 1.21.7</strong></p>
-      <p class="server-line">Email: <strong>rockfish114514@gmail.com</strong></p>
+      <div class="mod-title">Your IP Information</div>
+
+      <div class="mod-actions">
+        <a class="btn" href="javascript:void(0)" onclick="getIP()">
+          CHECK MY IP
+        </a>
+      </div>
+
+      <div id="ip-info" class="info-line">
+        Click the button to view your IP address
+      </div>
     </div>
 
-    <!-- 服务器状态 -->
-    <div class="panel">
-      <div class="status-title">Server Status</div>
-      <p class="status-line">
-        <span id="status-dot" class="dot"></span>
-        <span id="status-text">Checking...</span>
-      </p>
-      <p class="status-line">
-        Players:
-        <strong><span id="players-online">-</span> / <span id="players-max">-</span></strong>
-      </p>
-      <p class="status-line">
-        Version: <strong>Java 1.21.7</strong>
-      </p>
-    </div>
-
-    <!-- 粉色按钮面板（最后） -->
+    <!-- 其他链接 -->
     <div class="panel">
       <div class="mod-title">Other Links</div>
       <div class="button-panel">
@@ -253,34 +218,25 @@ footer{
 </div>
 
 <script>
-const serverAddress = "vrockfishv";
-const apiUrl = `https://api.mcsrvstat.us/3/${serverAddress}`;
+function getIP(){
+  const box = document.getElementById("ip-info");
+  box.textContent = "Loading...";
 
-fetch(apiUrl)
-  .then(res => res.json())
-  .then(data => {
-    const dot = document.getElementById("status-dot");
-    const text = document.getElementById("status-text");
-
-    if (data.online) {
-      dot.classList.add("online");
-      text.textContent = "Online";
-      document.getElementById("players-online").textContent =
-        data.players?.online ?? 0;
-      document.getElementById("players-max").textContent =
-        data.players?.max ?? "?";
-    } else {
-      text.textContent = "Offline";
-    }
-  })
-  .catch(() => {
-    document.getElementById("status-text").textContent = "Unavailable";
-  });
+  fetch("https://ipapi.co/json/")
+    .then(res => res.json())
+    .then(data => {
+      box.innerHTML = `
+        IP Address: <strong>${data.ip}</strong><br>
+        Country: <strong>${data.country_name}</strong><br>
+        City: <strong>${data.city}</strong><br>
+        ISP: <strong>${data.org ?? "Unknown"}</strong>
+      `;
+    })
+    .catch(() => {
+      box.textContent = "Failed to load IP information.";
+    });
+}
 </script>
 
 </body>
 </html>
-
-
-
-
